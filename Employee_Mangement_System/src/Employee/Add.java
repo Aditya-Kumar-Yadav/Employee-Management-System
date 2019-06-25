@@ -37,7 +37,7 @@ class Add
         titleLbl.setFont(new Font(null, Font.BOLD, 18));
 
             //ADDRESS_TITLE_LABEL setup
-        addressLbl = new JLabel("----------Address Details-----------");
+        addressLbl = new JLabel("----------Address Details----------");
         addressLbl.setBounds(200, 170, 440, 100);
         addressLbl.setFont(new Font(null, Font.BOLD, 12));
 
