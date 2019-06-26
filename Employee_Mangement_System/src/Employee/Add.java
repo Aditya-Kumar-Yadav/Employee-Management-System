@@ -182,11 +182,10 @@ class Add
         					PreparedStatement pst;
         						
         						//intializing the pst is necessary although it does not mean anything but to use RESULT_SET we need to intialize it. 
+        							//SQL STATEMENT to COUNT the total NUMBER_OF_EMPLOYEE till date.
         					pst = conn.prepareStatement("select count(*) from employee_table");
-        						//SQL STATEMENT to COUNT the total NUMBER_OF_EMPLOYEE till date.
-        					String countEmployeeQuery = "select count(*) from employee_table";
         						//RESULT_SET use to store the result of the excuted query.
-        					ResultSet rs = pst.executeQuery(countEmployeeQuery);
+        					ResultSet rs = pst.executeQuery();
         						//rs is set to 0 then next() is used to move the rs to next COLOUMN and switches to NEXT ROW.
         					rs.next();
         						//rs gets the FIRST COLOUMN and set to the employeeCount.

@@ -54,7 +54,7 @@ class Delete
         showDeletedRecordBtn.setBounds(180, 185, 220, 20);
         
         String[] tableColumn = {"EmpId", "FirstName", "LastName", "Father", "Gender", "Nationality", "Birth-Date", "Mobie No.", "Qualification"};
-        String[] addressTableColumn = {"EmpId", "Department", "Join-Date", "Address-Id", "Room-No", "Area", "City", "Pincode", "State"};
+        String[] addressTableColumn = {"Department", "Join-Date", "Address-Id", "Room-No", "Area", "City", "Pincode", "State"};
         	//DELETE_EMPLOYEE_TABLE
         DefaultTableModel tableModel = new DefaultTableModel();
         for(String columnName : tableColumn)
@@ -73,16 +73,14 @@ class Delete
         for(String columnName : addressTableColumn)
         	addressTableModel.addColumn(columnName);
         deleteEmployeeAddressTable = new JTable(addressTableModel);
-        TableColumnModel columnModel1 = deleteEmployeeAddressTable.getColumnModel();
-        columnModel1.getColumn(0).setMaxWidth(50);
-        columnModel1.getColumn(5).setMaxWidth(40);
-        columnModel1.getColumn(6).setMaxWidth(50);
-        columnModel1.getColumn(7).setMaxWidth(50);
         JScrollPane deletedEmployeeAddress = new JScrollPane(deleteEmployeeAddressTable);
         deletedEmployeeAddress.setBounds(10, 120, 575, 40);
         
         	//ALL_DELETED_EMPLOYEE_TABLE
-        allDeletedEmployeeTable = new JTable(tableModel);
+        DefaultTableModel allTableModel = new DefaultTableModel();
+        for(String columnName : tableColumn)
+        	allTableModel.addColumn(columnName);
+        allDeletedEmployeeTable = new JTable(allTableModel);
         TableColumnModel columnModelAll = allDeletedEmployeeTable.getColumnModel();
         columnModelAll.getColumn(0).setMaxWidth(50);
         columnModelAll.getColumn(3).setMaxWidth(60);
@@ -92,12 +90,10 @@ class Delete
         JScrollPane deleted = new JScrollPane(allDeletedEmployeeTable);
         deleted.setBounds(10, 215, 575, 100);
         
-        allDeletedEmployeeAdressTable = new JTable(addressTableModel);
-        TableColumnModel columnModelAll1 = allDeletedEmployeeAdressTable.getColumnModel();
-        columnModelAll1.getColumn(0).setMaxWidth(50);
-        columnModelAll1.getColumn(5).setMaxWidth(50);
-        columnModelAll1.getColumn(6).setMaxWidth(50);
-        columnModelAll1.getColumn(7).setMaxWidth(50);
+        DefaultTableModel allAddressTableModel = new DefaultTableModel();
+        for(String columnName : addressTableColumn)
+        	allAddressTableModel.addColumn(columnName);
+        allDeletedEmployeeAdressTable = new JTable(allAddressTableModel);
         JScrollPane deleted1 = new JScrollPane(allDeletedEmployeeAdressTable);
         deleted1.setBounds(10, 320, 575, 100);
         
@@ -108,8 +104,42 @@ class Delete
         			{
         				try
         				{
-        					PreparedStatement pst;
-        					pst = conn.prepareStatement("select * from Employee, ");
+        					if(tableModel.getRowCount() != 0)
+        					{
+        						tableModel.removeRow(0);
+        						addressTableModel.removeRow(0);
+        					}
+        						
+        					PreparedStatement st = conn.prepareStatement("SELECT EMPLOYEE_TABLE.EMP_ID, EMPLOYEE_TABLE.FIRST_NAME, EMPLOYEE_TABLE.LAST_NAME, EMPLOYEE_TABLE.FATHER_NAME, EMPLOYEE_TABLE.GENDER, EMPLOYEE_TABLE.NATIONALITY, EMPLOYEE_TABLE.DATE_OF_BIRTH, EMPLOYEE_TABLE.MOBILE_NUMBER, EMPLOYEE_TABLE.HIGHEST_QUALIFICATION, EMPLOYEE_TABLE.DEPARTMENT, EMPLOYEE_TABLE.DATE_OF_JOINING, ADDRESS_TABLE.ADD_ID, ADDRESS_TABLE.ROOM_NUMBER, ADDRESS_TABLE.AREA, ADDRESS_TABLE.CITY, ADDRESS_TABLE.PINCODE, ADDRESS_TABLE.STATE FROM EMPLOYEE_TABLE, ADDRESS_TABLE WHERE (EMPLOYEE_TABLE.EMP_ID = ? AND EMPLOYEE_TABLE.EMP_ID = ADDRESS_TABLE.EMP_ID)");
+        					st.setString(1, empIdTxt.getText());
+        					
+        					ResultSet rs = st.executeQuery();
+        					
+        					Object[] employeeTableData = new Object[9];
+        					Object[] employeeAddressTableData = new Object[9];
+        					int k = 1;
+        					int i = 0;
+        					int j = 0;
+        					rs.next();
+        					while(k <= 17)
+        					{
+        						if(i < 9)
+        						{
+        							employeeTableData[i] = rs.getString(k);
+        						}
+        						else if(j < 8)
+        						{
+        							employeeAddressTableData[j] = rs.getString(k);
+        							j++;	
+        						}
+        						i++;
+        						k++;
+        					}
+        					
+        					tableModel.addRow(employeeTableData);
+        					addressTableModel.addRow(employeeAddressTableData);
+        					
+        					
         				}
         				catch(SQLException sqle)
         				{
