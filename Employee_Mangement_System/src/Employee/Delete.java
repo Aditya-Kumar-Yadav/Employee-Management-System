@@ -3,7 +3,6 @@ package Employee;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
-import java.util.Vector;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -19,7 +18,6 @@ class Delete
     
     static JPanel delete(Connection conn)
     {
-    	Connection connection = conn;
         //rightPanel is the DISPLAY_PANEL that have to be returned to the MainPage. 
             //DISPLAY_PANEL setup
         JPanel rightPanel = new JPanel();

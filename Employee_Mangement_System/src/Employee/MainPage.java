@@ -287,6 +287,6 @@ class MainPage implements ActionListener
     
     public static void main(String args[])
     {
-        MainPage t = new MainPage();
+       new MainPage();
     }
 }

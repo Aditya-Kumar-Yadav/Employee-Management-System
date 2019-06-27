@@ -191,7 +191,7 @@ class Add
         						//rs gets the FIRST COLOUMN and set to the employeeCount.
         					employeeCount = rs.getInt(1);
         					
-        					
+        						//To check MOBILE_NUMBER is valid or not.
         					boolean checkMobileNumberTrue = checkMobileNumber(mobileNumberTxt.getText());
         					
         					if("".equals(firstNameTxt.getText()) || "".equals(lastNameTxt.getText()) || "".equals(fatherNameTxt.getText()) || "".equals(mobileNumberTxt.getText()) || "".equals(dateOfBirthTxt.getText()) || "".equals(dateOfJoiningTxt.getText()) || "".equals(roomNoTxt.getText()) || "".equals(areaTxt.getText()) || "".equals(cityTxt.getText()) || "".equals(pincodeTxt.getText()) || "".equals(stateTxt.getText()))
@@ -396,11 +396,12 @@ class Add
     	return empCode;
     }
     
+    	//checkMobileNumber method RETURNS TRUE if mobileNumber is of 10-DIGIT and NUMERIC else FALSE
     static boolean checkMobileNumber(String mobileNumber)
     {
     	try
     	{
-    		Long number = Long.parseLong(mobileNumber);
+    		Long.parseLong(mobileNumber);
     		if(mobileNumber.length() == 10)
         	{
         		return true;
