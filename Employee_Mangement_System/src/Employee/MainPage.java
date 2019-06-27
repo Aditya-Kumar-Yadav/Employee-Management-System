@@ -1,8 +1,10 @@
 package Employee;
 
 import java.awt.*;
+
 import javax.swing.*;
 import java.awt.event.*;
+import java.net.URL;
 import java.sql.*;
 
 //All Imported Classes
@@ -14,7 +16,7 @@ import Employee.Delete;
 class MainPage implements ActionListener
 {
     JFrame mainFrame;
-    JLabel titleLbl, rightPanelStartLbl1, rightPanelStartLbl2, rightPanelStartLbl3;
+    JLabel titleLbl, rightPanelStartLbl1, rightPanelStartLbl2, rightPanelStartLbl3, wIcon, submitLbl, adityaNameLbl, vipinNameLbl;
     JButton newBtn, searchBtn, sortBtn, deleteBtn;
 
     JPanel leftPanel, rightPanel, titlePanel, addPanel, searchPanel, sortPanel, deletePanel;
@@ -65,13 +67,22 @@ class MainPage implements ActionListener
             //DISPLAYPANEL Label
         rightPanelStartLbl1 = new JLabel("Employee");
         rightPanelStartLbl1.setForeground(Color.magenta);
-        rightPanelStartLbl1.setFont(new Font(null, Font.BOLD, 80));
+        rightPanelStartLbl1.setFont(new Font(null, Font.BOLD, 30));
         rightPanelStartLbl2 = new JLabel("Management");
         rightPanelStartLbl2.setForeground(Color.green);
-        rightPanelStartLbl2.setFont(new Font(null, Font.BOLD, 80));
+        rightPanelStartLbl2.setFont(new Font(null, Font.BOLD, 30));
         rightPanelStartLbl3 = new JLabel("System");
         rightPanelStartLbl3.setForeground(Color.orange);
-        rightPanelStartLbl3.setFont(new Font(null, Font.BOLD, 80));
+        rightPanelStartLbl3.setFont(new Font(null, Font.BOLD, 30));
+        	//SUBMIT_LABEL
+        submitLbl = new JLabel("Submitted By - ");
+        submitLbl.setFont(new Font(null, Font.BOLD, 18));
+        	//ADITYA_NAME_LABEL
+        adityaNameLbl = new JLabel("Aditya Kumar Yadav");
+        adityaNameLbl.setFont(new Font(null, Font.BOLD, 18));
+        	//VIPIN_NAME_LABLE
+        vipinNameLbl = new JLabel("Vipin Kumar Yadav");
+        vipinNameLbl.setFont(new Font(null, Font.BOLD, 18));
 
         //All BUTTON Setup
             //ADD Button
@@ -90,6 +101,21 @@ class MainPage implements ActionListener
         deleteBtn = new JButton("DELETE");
         deleteBtn.setForeground(Color.red);
         deleteBtn.setFont(new Font(null, Font.BOLD, 17));
+        
+        //IMAGE setup
+        wIcon = new JLabel();
+        try
+        {
+        	//BufferedImage img;
+        	//img = ImageIO.read(MainPage.class.);
+        	URL url = MainPage.class.getResource("/imgs/Image.JPG");
+        	wIcon.setIcon(new ImageIcon(url));
+        	wIcon.setBounds(170, 120, 200, 200);
+        }
+        catch(Exception e)
+        {
+        	System.out.println(e);
+        }
 
         // all BUTTON bounds
         newBtn.setBounds(20, 20, 160, 60);
@@ -99,9 +125,12 @@ class MainPage implements ActionListener
 
         //all LABEL bounds
         titleLbl.setBounds(300, 10, 770, 20);
-        rightPanelStartLbl1.setBounds(120, 10, 600, 100);
-        rightPanelStartLbl2.setBounds(60, 130, 600, 100);
-        rightPanelStartLbl3.setBounds(150, 250, 600, 100);
+        rightPanelStartLbl1.setBounds(200, 5, 600, 35);
+        rightPanelStartLbl2.setBounds(180, 40, 600, 35);
+        rightPanelStartLbl3.setBounds(220, 75, 600, 35);
+        submitLbl.setBounds(300, 340, 200, 30);
+        adityaNameLbl.setBounds(400, 370, 200, 20);
+        vipinNameLbl.setBounds(400, 400, 200, 20);
 
         // all PANEL bounds
         titlePanel.setBounds(0, 0, 800, 40);
@@ -124,6 +153,10 @@ class MainPage implements ActionListener
         rightPanel.add(rightPanelStartLbl1);
         rightPanel.add(rightPanelStartLbl2);
         rightPanel.add(rightPanelStartLbl3);
+        rightPanel.add(wIcon);
+        rightPanel.add(submitLbl);
+        rightPanel.add(adityaNameLbl);
+        rightPanel.add(vipinNameLbl);
         
 
         //Adding ACTIONLISTENER to the BUTTONS
