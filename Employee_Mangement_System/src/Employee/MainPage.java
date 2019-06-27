@@ -43,19 +43,19 @@ class MainPage implements ActionListener
             //ADD Panel
         addPanel = new JPanel();
         addPanel.setLayout(null);
-        addPanel.setBackground(new Color(138,43,226));
+        addPanel.setBackground(new Color(0,100, 0));
             //SEARCH Panel
         searchPanel = new JPanel();
         searchPanel.setLayout(null);
-        searchPanel.setBackground(new Color(138,43,226));
+        searchPanel.setBackground(new Color(0,100, 0));
             //SORT Panel
         sortPanel = new JPanel();
         sortPanel.setLayout(null);
-        sortPanel.setBackground(new Color(138,43,226));
+        sortPanel.setBackground(new Color(0,100, 0));
             //DELETE Panel
         deletePanel = new JPanel();
         deletePanel.setLayout(null);
-        deletePanel.setBackground(new Color(138,43,226));
+        deletePanel.setBackground(new Color(0,100, 0));
 
         // All LABEL Setup
             //TITLE Label
@@ -64,32 +64,32 @@ class MainPage implements ActionListener
         titleLbl.setFont(new Font(null, Font.BOLD, 15));
             //DISPLAYPANEL Label
         rightPanelStartLbl1 = new JLabel("Employee");
-        rightPanelStartLbl1.setForeground(Color.green);
+        rightPanelStartLbl1.setForeground(Color.magenta);
         rightPanelStartLbl1.setFont(new Font(null, Font.BOLD, 80));
         rightPanelStartLbl2 = new JLabel("Management");
         rightPanelStartLbl2.setForeground(Color.green);
         rightPanelStartLbl2.setFont(new Font(null, Font.BOLD, 80));
         rightPanelStartLbl3 = new JLabel("System");
-        rightPanelStartLbl3.setForeground(Color.green);
+        rightPanelStartLbl3.setForeground(Color.orange);
         rightPanelStartLbl3.setFont(new Font(null, Font.BOLD, 80));
 
         //All BUTTON Setup
             //ADD Button
-        newBtn = new JButton("ADD");
+        newBtn = new JButton("NEW");
         newBtn.setForeground(Color.magenta);
-        newBtn.setFont(new Font(null, Font.BOLD, 15));
+        newBtn.setFont(new Font(null, Font.BOLD, 17));
             //SEARCH Button
         searchBtn = new JButton("SEARCH");
         searchBtn.setForeground(Color.blue);
-        searchBtn.setFont(new Font(null, Font.BOLD, 15));
+        searchBtn.setFont(new Font(null, Font.BOLD, 17));
             //SORT Button
-        sortBtn = new JButton("SORT");
+        sortBtn = new JButton("DISPLAY");
         sortBtn.setForeground(Color.ORANGE);
-        sortBtn.setFont(new Font(null, Font.BOLD, 15));
+        sortBtn.setFont(new Font(null, Font.BOLD, 17));
             //DELETE Button
         deleteBtn = new JButton("DELETE");
         deleteBtn.setForeground(Color.red);
-        deleteBtn.setFont(new Font(null, Font.BOLD, 15));
+        deleteBtn.setFont(new Font(null, Font.BOLD, 17));
 
         // all BUTTON bounds
         newBtn.setBounds(20, 20, 160, 60);
@@ -109,7 +109,7 @@ class MainPage implements ActionListener
         addPanel.setBounds(0, 40, 200, 110);
         searchPanel.setBounds(0, 145, 200, 105);
         sortPanel.setBounds(0, 250, 200, 110);
-        deletePanel.setBounds(0, 360, 200, 110);
+        deletePanel.setBounds(0, 360, 200, 120);
 
         //Adding Components To PANEL
             //ADD_PANEL
@@ -184,9 +184,9 @@ class MainPage implements ActionListener
         {
             //Below code turns the SELECTED_PANEL color same as the DISPLAY_PANEL and other to GREEN color.
             addPanel.setBackground(new Color(255, 255, 153));
-            searchPanel.setBackground(new Color(138,43,226));
-            sortPanel.setBackground(new Color(138,43,226));
-            deletePanel.setBackground(new Color(138,43,226));
+            searchPanel.setBackground(new Color(0,100, 0));
+            sortPanel.setBackground(new Color(0,100, 0));
+            deletePanel.setBackground(new Color(0,100, 0));
 
             //If DISPLAY_PANEL contains some come components then below code remove the DISPLAY_PANEL.
                 //It needs to be removed for new components to display on the DISPLAY_PANEL.
@@ -209,10 +209,10 @@ class MainPage implements ActionListener
         else if(e.getSource() == searchBtn)
         {
             //Below code turns the SELECTED_PANEL color same as the DISPLAY_PANEL and other to GREEN color.
-            addPanel.setBackground(new Color(138,43,226));
+            addPanel.setBackground(new Color(0,100, 0));
             searchPanel.setBackground(new Color(255, 255, 153));
-            sortPanel.setBackground(new Color(138,43,226));
-            deletePanel.setBackground(new Color(138,43,226));
+            sortPanel.setBackground(new Color(0,100, 0));
+            deletePanel.setBackground(new Color(0,100, 0));
 
             //If DISPLAY_PANEL contains some come components then below code remove the DISPLAY_PANEL.
                 //It needs to be removed for new components to display on the DISPLAY_PANEL.
@@ -235,10 +235,10 @@ class MainPage implements ActionListener
         else if(e.getSource() == sortBtn)
         {
             //Below code turns the SELECTED_PANEL color same as the DISPLAY_PANEL and other to GREEN color.
-            addPanel.setBackground(new Color(138,43,226));
-            searchPanel.setBackground(new Color(138,43,226));
+            addPanel.setBackground(new Color(0,100, 0));
+            searchPanel.setBackground(new Color(0,100, 0));
             sortPanel.setBackground(new Color(255, 255, 153));
-            deletePanel.setBackground(new Color(138,43,226));
+            deletePanel.setBackground(new Color(0,100, 0));
 
             //If DISPLAY_PANEL contains some come components then below code remove the DISPLAY_PANEL.
                 //It needs to be removed for new components to display on the DISPLAY_PANEL.
@@ -261,9 +261,9 @@ class MainPage implements ActionListener
         else if(e.getSource() == deleteBtn)
         {
             //Below code turns the SELECTED_PANEL color same as the DISPLAY_PANEL and other to GREEN color.
-            addPanel.setBackground(new Color(138,43,226));
-            searchPanel.setBackground(new Color(138,43,226));
-            sortPanel.setBackground(new Color(138,43,226));
+            addPanel.setBackground(new Color(0,100, 0));
+            searchPanel.setBackground(new Color(0,100, 0));
+            sortPanel.setBackground(new Color(0,100, 0));
             deletePanel.setBackground(new Color(255, 255, 153));
 
             //If DISPLAY_PANEL contains some come components then below code remove the DISPLAY_PANEL.
