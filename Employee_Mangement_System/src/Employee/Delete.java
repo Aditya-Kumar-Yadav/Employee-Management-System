@@ -67,14 +67,14 @@ class Delete
         columnModel.getColumn(6).setMaxWidth(60);
         columnModel.getColumn(7).setMaxWidth(70);
         JScrollPane deletedEmployee = new JScrollPane(deleteEmployeeTable);
-        deletedEmployee.setBounds(10, 80, 575, 40);
+        deletedEmployee.setBounds(10, 80, 570, 40);
         
         DefaultTableModel addressTableModel = new DefaultTableModel();
         for(String columnName : addressTableColumn)
         	addressTableModel.addColumn(columnName);
         deleteEmployeeAddressTable = new JTable(addressTableModel);
         JScrollPane deletedEmployeeAddress = new JScrollPane(deleteEmployeeAddressTable);
-        deletedEmployeeAddress.setBounds(10, 120, 575, 40);
+        deletedEmployeeAddress.setBounds(10, 120, 570, 40);
         
         	//ALL_DELETED_EMPLOYEE_TABLE
         DefaultTableModel allTableModel = new DefaultTableModel();
@@ -88,14 +88,14 @@ class Delete
         columnModelAll.getColumn(6).setMaxWidth(60);
         columnModelAll.getColumn(7).setMaxWidth(70);
         JScrollPane deleted = new JScrollPane(allDeletedEmployeeTable);
-        deleted.setBounds(10, 215, 575, 100);
+        deleted.setBounds(10, 215, 570, 100);
         
         DefaultTableModel allAddressTableModel = new DefaultTableModel();
         for(String columnName : addressTableColumn)
         	allAddressTableModel.addColumn(columnName);
         allDeletedEmployeeAdressTable = new JTable(allAddressTableModel);
         JScrollPane deleted1 = new JScrollPane(allDeletedEmployeeAdressTable);
-        deleted1.setBounds(10, 320, 575, 100);
+        deleted1.setBounds(10, 320, 570, 100);
         
         	//ADDING ACTION_LISTENER to the BUTTONS
         searchBtn.addActionListener(new ActionListener()

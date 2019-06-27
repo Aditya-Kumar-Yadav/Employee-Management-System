@@ -37,7 +37,7 @@ class Add
         titleLbl.setFont(new Font(null, Font.BOLD, 18));
 
             //ADDRESS_TITLE_LABEL setup
-        addressLbl = new JLabel("----------Address Details----------");
+        addressLbl = new JLabel("---------- Address Details ----------");
         addressLbl.setBounds(200, 170, 440, 100);
         addressLbl.setFont(new Font(null, Font.BOLD, 12));
 
@@ -179,123 +179,139 @@ class Add
         						//TOTAL_EMPLOYEE_COUNT till date.
         					int employeeCount;
         						//PreparedStatement is used to EXECUTE the SQL_QUERY.
-        					PreparedStatement pst;
+        					PreparedStatement countPst, employeePst, addressPst;
         						
-        						//intializing the pst is necessary although it does not mean anything but to use RESULT_SET we need to intialize it. 
+        						//initializing the pst is necessary although it does not mean anything but to use RESULT_SET we need to intialize it. 
         							//SQL STATEMENT to COUNT the total NUMBER_OF_EMPLOYEE till date.
-        					pst = conn.prepareStatement("select count(*) from employee_table");
+        					countPst = conn.prepareStatement("select count(*) from employee_table");
         						//RESULT_SET use to store the result of the excuted query.
-        					ResultSet rs = pst.executeQuery();
+        					ResultSet rs = countPst.executeQuery();
         						//rs is set to 0 then next() is used to move the rs to next COLOUMN and switches to NEXT ROW.
         					rs.next();
         						//rs gets the FIRST COLOUMN and set to the employeeCount.
         					employeeCount = rs.getInt(1);
         					
-        						//getSelectedItem is used to get the text of JComboBox and returns the Object.
-        					String departmentSelected = (String)departmentComboBox.getSelectedItem();
-        					String tempEmpId = empIdGenerator(departmentSelected, employeeCount);
-        						//EMPLOYEE_TABLE_INSERT_SQL_QUERY
-	        				String employeeTableQuery = "insert into employee_table values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	        				pst = conn.prepareStatement(employeeTableQuery);
-	        					//setting all the QUESTION_MARK OF THE EMPLOYEE_TABLE_INSERT_SQL_QUERY
-	        						//EMPLOYEE_ID
-	        				pst.setString(1, tempEmpId);
-	        						//FIRST_NAME
-	        				pst.setString(2, firstNameTxt.getText());
-	        						//LAST_NAME
-	        				pst.setString(3, lastNameTxt.getText());
-	        						//FATHER_NAME
-	        				pst.setString(4, fatherNameTxt.getText());
-	        						//GENDER
-	        				pst.setString(5, (String)genderComboBox.getSelectedItem());
-	        						//NATIONALITY
-	        				pst.setString(6, (String)nationalityComboBox.getSelectedItem());
-	        						//DATE_OF_BIRTH
-	        				pst.setString(7, dateOfBirthTxt.getText());
-	        						//MOBILE_NUMBER
-	        				pst.setLong(8, Long.parseLong(mobileNumberTxt.getText()));
-	        						//HIGHEST_QUALIFICATION
-	        				pst.setString(9, (String)highestQualificationComboBox.getSelectedItem());
-	        						//DEPARTMENT
-	        				pst.setString(10, departmentSelected);
-	        						//DATE_OF_JOINING
-	        				pst.setString(11, dateOfJoiningTxt.getText());
-	        				
-	        				exit:
+        					
+        					boolean checkMobileNumberTrue = checkMobileNumber(mobileNumberTxt.getText());
+        					
+        					if("".equals(firstNameTxt.getText()) || "".equals(lastNameTxt.getText()) || "".equals(fatherNameTxt.getText()) || "".equals(mobileNumberTxt.getText()) || "".equals(dateOfBirthTxt.getText()) || "".equals(dateOfJoiningTxt.getText()) || "".equals(roomNoTxt.getText()) || "".equals(areaTxt.getText()) || "".equals(cityTxt.getText()) || "".equals(pincodeTxt.getText()) || "".equals(stateTxt.getText()))
 	        				{
-		        				if("".equals(firstNameTxt.getText()) || "".equals(lastNameTxt.getText()) || "".equals(fatherNameTxt.getText()) || "".equals(mobileNumberTxt.getText()) || "".equals(dateOfBirthTxt.getText()) || "".equals(dateOfJoiningTxt.getText()))
-		        				{
-		        					JOptionPane.showMessageDialog(rightPanel, "Please Fill All The Entries");
-		        					break exit;
-		        				}
-		        				else
-		        				{
-		        					//RUNNING the EMPLOYEE_TABLE_INSERT_SQL_QUERY
-		        					pst.executeUpdate();
-		        				}
+	        					JOptionPane.showMessageDialog(rightPanel, "Please Fill All The Entries");
+	        				}
+        					else if(checkMobileNumberTrue)
+        					{
+        						//getSelectedItem is used to get the text of JComboBox and returns the Object.
+        						String departmentSelected = (String)departmentComboBox.getSelectedItem();
+        						String tempEmpId = empIdGenerator(departmentSelected, employeeCount);
+        						
+	        						//EMPLOYEE_TABLE_INSERT_SQL_QUERY
+		        				String employeeTableQuery = "insert into employee_table values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		        				employeePst = conn.prepareStatement(employeeTableQuery);
+		        					//setting all the QUESTION_MARK OF THE EMPLOYEE_TABLE_INSERT_SQL_QUERY
+		        						//EMPLOYEE_ID
+		        				employeePst.setString(1, tempEmpId);
+		        						//FIRST_NAME
+		        				employeePst.setString(2, firstNameTxt.getText());
+		        						//LAST_NAME
+		        				employeePst.setString(3, lastNameTxt.getText());
+		        						//FATHER_NAME
+		        				employeePst.setString(4, fatherNameTxt.getText());
+		        						//GENDER
+		        				employeePst.setString(5, (String)genderComboBox.getSelectedItem());
+		        						//NATIONALITY
+		        				employeePst.setString(6, (String)nationalityComboBox.getSelectedItem());
+		        						//DATE_OF_BIRTH
+		        				employeePst.setString(7, dateOfBirthTxt.getText());
+		        						//MOBILE_NUMBER
+		        				employeePst.setLong(8, Long.parseLong(mobileNumberTxt.getText()));
+		        						//HIGHEST_QUALIFICATION
+		        				employeePst.setString(9, (String)highestQualificationComboBox.getSelectedItem());
+		        						//DEPARTMENT
+		        				employeePst.setString(10, departmentSelected);
+		        						//DATE_OF_JOINING
+		        				employeePst.setString(11, dateOfJoiningTxt.getText());
 		        				
 		        					//ADDRESS_ID generation
 		        				String tempAddressId = new String(tempEmpId.concat("Add"));
 		        					//ADDRESS_TABLE_INSERT_SQL_QUERY
 		        				String addressTableQuery = "insert into address_table values(?, ?, ?, ?, ?, ?, ?)";
-		        				pst = conn.prepareStatement(addressTableQuery);
+		        				addressPst = conn.prepareStatement(addressTableQuery);
 		        					//setting all the QUESTION_MARK OF THE EMPLOYEE_TABLE_INSERT_SQL_QUERY
 		        						//ADDRESS_ID
-		        				pst.setString(1, tempAddressId);
+		        				addressPst.setString(1, tempAddressId);
 		        						//ROOM_NUMBER
-		        				pst.setString(2, roomNoTxt.getText());
+		        				addressPst.setString(2, roomNoTxt.getText());
 		        						//AREA
-		        				pst.setString(3, areaTxt.getText());
+		        				addressPst.setString(3, areaTxt.getText());
 		        						//CITY
-		        				pst.setString(4, cityTxt.getText());
+		        				addressPst.setString(4, cityTxt.getText());
 		        						//PINCODE
-		        				pst.setString(5, pincodeTxt.getText());
+		        				addressPst.setString(5, pincodeTxt.getText());
 		        						//STATE
-		        				pst.setString(6, stateTxt.getText());
+		        				addressPst.setString(6, stateTxt.getText());
 		        						//EMPLYEE_ID as FORIEGN_KEY
-		        				pst.setString(7, tempEmpId);
+		        				addressPst.setString(7, tempEmpId);
 		        				
-		        				
-		        				if("".equals(roomNoTxt.getText()) || "".equals(areaTxt.getText()) || "".equals(cityTxt.getText()) || "".equals(pincodeTxt.getText()) || "".equals(stateTxt.getText()))
-		        				{
-		        					JOptionPane.showMessageDialog(rightPanel, "Please Fill All The Entries");
-		        					break exit;
-		        				}
-		        				else
-		        				{
-		        					//RUNNING the ADDRESS_TABLE_INSERT_SQL_QUERY
-		        					pst.executeUpdate();
-		        				}
+		        				//RUNNING the EMPLOYEE_TABLE_INSERT_SQL_QUERY
+		        				employeePst.executeUpdate();
+		        				//RUNNING the ADDRESS_TABLE_INSERT_SQL_QUERY
+		        				addressPst.executeUpdate();
+		        				//set all the TEXTFIELD to empty for more entries
+		        				firstNameTxt.setText("");
+		        				lastNameTxt.setText("");
+		        				fatherNameTxt.setText("");
+		        				genderComboBox.setSelectedItem(gender[0]);
+		        				nationalityComboBox.setSelectedItem(nationality[0]);
+		        				dateOfBirthTxt.setText("");
+		        				mobileNumberTxt.setText("");
+		        				highestQualificationComboBox.setSelectedItem(qualification[0]);
+		        				departmentComboBox.setSelectedItem(department[0]);
+		        				dateOfJoiningTxt.setText("");
+		        				roomNoTxt.setText("");
+		        				areaTxt.setText("");
+		        				cityTxt.setText("");
+		        				pincodeTxt.setText("");
+		        				stateTxt.setText("");
 		        				
 		        				JOptionPane.showMessageDialog(rightPanel, "Saved Successfully");
-	        				}
-	        					//set all the TEXTFIELD to empty for more entries
-	        				firstNameTxt.setText("");
-	        				lastNameTxt.setText("");
-	        				fatherNameTxt.setText("");
-	        				genderComboBox.setSelectedItem(gender[0]);
-	        				nationalityComboBox.setSelectedItem(nationality[0]);
-	        				dateOfBirthTxt.setText("");
-	        				mobileNumberTxt.setText("");
-	        				highestQualificationComboBox.setSelectedItem(qualification[0]);
-	        				departmentComboBox.setSelectedItem(department[0]);
-	        				dateOfJoiningTxt.setText("");
-	        				roomNoTxt.setText("");
-	        				areaTxt.setText("");
-	        				cityTxt.setText("");
-	        				pincodeTxt.setText("");
-	        				stateTxt.setText("");
-	        				
-        					
+        					}
+        					else
+        					{
+        						JOptionPane.showMessageDialog(rightPanel, "Invalid Mobile Number");
+        					}
         				}
         					//it catches all the SQL_EXCEPTION
         				catch(SQLException SQLe)
         				{
-        					System.out.println(SQLe);
+        					JOptionPane.showMessageDialog(rightPanel, "Invalid Mobile Number");
         				}
         			}
         		});
-
+        		//Adding ActionListener on the RESET_BUTTON
+        resetBtn.addActionListener(new ActionListener()
+        		{
+        			public void actionPerformed(ActionEvent e)
+        			{
+        				//set all the TEXTFIELD to empty 
+        				firstNameTxt.setText("");
+        				lastNameTxt.setText("");
+        				fatherNameTxt.setText("");
+        				genderComboBox.setSelectedItem(gender[0]);
+        				nationalityComboBox.setSelectedItem(nationality[0]);
+        				dateOfBirthTxt.setText("");
+        				mobileNumberTxt.setText("");
+        				highestQualificationComboBox.setSelectedItem(qualification[0]);
+        				departmentComboBox.setSelectedItem(department[0]);
+        				dateOfJoiningTxt.setText("");
+        				roomNoTxt.setText("");
+        				areaTxt.setText("");
+        				cityTxt.setText("");
+        				pincodeTxt.setText("");
+        				stateTxt.setText("");
+        				
+        				JOptionPane.showMessageDialog(rightPanel, "Reset Completed");
+        			}	
+        		});
             //Adding COMPONENTS to the DISPLAY_PANEL
         rightPanel.add(titleLbl);
         rightPanel.add(addressLbl);
@@ -378,6 +394,26 @@ class Add
     	empCode = empCode + (count + 1);
     	
     	return empCode;
+    }
+    
+    static boolean checkMobileNumber(String mobileNumber)
+    {
+    	try
+    	{
+    		Long number = Long.parseLong(mobileNumber);
+    		if(mobileNumber.length() == 10)
+        	{
+        		return true;
+        	}
+    		else
+    		{
+    			return false;
+    		}
+    	}
+    	catch(NumberFormatException e)
+    	{
+    		return false;
+    	}
     }
 }
 

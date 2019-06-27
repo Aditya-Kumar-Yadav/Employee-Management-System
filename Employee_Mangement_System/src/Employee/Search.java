@@ -60,7 +60,7 @@ class Search
         	//so JSCROLLPANE is created and INTIALIZED with our DISPLAY
         JScrollPane firstShowTable = new JScrollPane(firstTable);
         	//SETBOUNDS is used to set the CO-ORDINATES and SIZE of DISPLAY
-        firstShowTable.setBounds(10, 90, 575, 100);
+        firstShowTable.setBounds(10, 90, 570, 100);
         
         			//SECOND_DISPLAY
         	//DEFAULT_TABLE_MODEL create to make a TABLE_FORMATTED_DISPLAY
@@ -73,9 +73,9 @@ class Search
     		//so JSCROLLPANE is created and INTIALIZED with our DISPLAY
         JScrollPane secondShowTable = new JScrollPane(secondTable);
         	//SETBOUNDS is used to set the CO-ORDINATES and SIZE of DISPLAY
-        secondShowTable.setBounds(10, 200, 575, 100);
+        secondShowTable.setBounds(10, 200, 570, 100);
         
-        			//THIRD_DISPALY
+        			//THIRD_DISPLAY
         	//DEFAULT_TABLE_MODEL create to make a TABLE_FORMATTED_DISPLAY
         DefaultTableModel thirdTableModel = new DefaultTableModel();
         	//all COLUMN_NAMES are set by using SET_COLUMN_IDENTIFIERS_METHOD
@@ -86,7 +86,7 @@ class Search
 			//so JSCROLLPANE is created and INTIALIZED with our DISPLAY
         JScrollPane thirdShowTable = new JScrollPane(thirdTable);
         	//SETBOUNDS is used to set the CO-ORDINATES and SIZE of DISPLAY
-        thirdShowTable.setBounds(10, 310, 575, 100);
+        thirdShowTable.setBounds(10, 310, 570, 100);
         
         	//adding ACTIONLISTENER to the SEARCH_BUTTON
         searchBtn.addActionListener(new ActionListener()
