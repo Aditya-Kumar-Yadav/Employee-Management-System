@@ -189,25 +189,38 @@ class Delete
 		        			}
 		        			else
 		        			{
-				        		PreparedStatement copyDataSqlQuery = conn.prepareStatement("begin insert into deleted_employee_table select * from employee_table where emp_id = ?; insert into deleted_address_table select * from address_table where emp_id = ?; end;");
-				        			
-				        		copyDataSqlQuery.setString(1, emp_id);
-				        		copyDataSqlQuery.setString(2, emp_id);
-				        			
-				        		PreparedStatement deleteDataSqlQuery = conn.prepareStatement("begin delete from employee_table where emp_id = ?; delete from address_table where emp_id = ?; end;");
-				        			
-				        		deleteDataSqlQuery.setString(1, emp_id);
-				        		deleteDataSqlQuery.setString(2, emp_id);
-				        			
-				        		copyDataSqlQuery.executeUpdate();
-				        		deleteDataSqlQuery.executeUpdate();
-				        		empIdTxt.setText("");
-				        		JOptionPane.showMessageDialog(rightPanel, "Record Deleted");
+		        				PreparedStatement checkSqlQuery = conn.prepareStatement("Select count(*) from employee_table where emp_id = ?");
+		        				checkSqlQuery.setString(1, emp_id);
+		        				ResultSet rs = checkSqlQuery.executeQuery();
+		        				rs.next();
+		        				if("0".equals(rs.getString(1)))
+		        				{
+		        					JOptionPane.showMessageDialog(rightPanel, "No Record Found To Be Deleted");
+		        				}
+		        				else
+		        				{
+					        		PreparedStatement copyDataSqlQuery = conn.prepareStatement("begin insert into deleted_employee_table select * from employee_table where emp_id = ?; insert into deleted_address_table select * from address_table where emp_id = ?; end;");
+					        			
+					        		copyDataSqlQuery.setString(1, emp_id);
+					        		copyDataSqlQuery.setString(2, emp_id);
+					        			
+					        		PreparedStatement deleteDataSqlQuery = conn.prepareStatement("begin delete from employee_table where emp_id = ?; delete from address_table where emp_id = ?; end;");
+					        			
+					        		deleteDataSqlQuery.setString(1, emp_id);
+					        		deleteDataSqlQuery.setString(2, emp_id);
+					        			
+					        		
+					        		copyDataSqlQuery.executeUpdate();
+					        		deleteDataSqlQuery.executeUpdate();
+					        		empIdTxt.setText("");
+					        		JOptionPane.showMessageDialog(rightPanel, "Record Deleted");
+		        				}
 			        		}
 		        		}
 		        		catch(SQLException sqle)
 		        		{
 		        			JOptionPane.showMessageDialog(rightPanel, "No Record Found");
+		        			System.out.println(sqle);
 		        		}
 		        	}
         });
@@ -216,6 +229,15 @@ class Delete
 	        	{
 	        		try
 	        		{
+	        			//REMOVING_EXISTING_ROWS from all the TABLE_FORMATTED_DISPLAY
+						if(allTableModel.getRowCount() != 0)
+						{
+							while(allTableModel.getRowCount() != 0)
+							{
+								allTableModel.removeRow(0);
+								allAddressTableModel.removeRow(0);
+							}
+						}
 	        			PreparedStatement showDeletedRecord = conn.prepareStatement("select * from deleted_employee_table, deleted_address_table where (deleted_employee_table.emp_id = deleted_address_table.emp_id)");
 	        			ResultSet deletedRecordResult = showDeletedRecord.executeQuery();
 	        			
