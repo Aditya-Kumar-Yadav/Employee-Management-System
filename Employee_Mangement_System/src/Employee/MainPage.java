@@ -283,7 +283,7 @@ class MainPage implements ActionListener
             //Here previously defined DISPLAY_PANEL to the new PANEL that comes from another class i.e Sort.
                 //Here Sort is an another class and sort() is a method that returns the NEW_DISPLAY_PANEL.
                     //NEW_DISPLAY_PANEL copies its whole component to the DISPLAY_PANEL.
-            this.rightPanel = Sort.sort();
+            this.rightPanel = Sort.sort(conn);
             //Now DISPLAY_PANEL is added back to the MAINFRAME so that it can display the new added components.
             mainFrame.add(rightPanel);
             //It helps to UPDATE the MAINFRAME so that new changes can be displayed.
