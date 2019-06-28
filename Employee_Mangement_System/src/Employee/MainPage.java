@@ -16,9 +16,11 @@ import Employee.Delete;
 class MainPage implements ActionListener
 {
     JFrame mainFrame;
-    JLabel titleLbl, rightPanelStartLbl1, rightPanelStartLbl2, rightPanelStartLbl3, wIcon, submitLbl, adityaNameLbl, vipinNameLbl;
+    JLabel titleLbl, rightPanelStartLbl1, rightPanelStartLbl2, rightPanelStartLbl3, submitLbl, adityaNameLbl, vipinNameLbl;
     JButton newBtn, searchBtn, sortBtn, deleteBtn;
 
+    JLabel wIcon;
+    
     JPanel leftPanel, rightPanel, titlePanel, addPanel, searchPanel, sortPanel, deletePanel;
     
     Connection conn;
@@ -108,9 +110,12 @@ class MainPage implements ActionListener
         {
         	//BufferedImage img;
         	//img = ImageIO.read(MainPage.class.);
-        	URL url = MainPage.class.getResource("/imgs/Image.JPG");
+        	//ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("imgs/Image.JPG"));
+        	//wIcon.setIcon(icon);
+        	//URL url = MainPage.class.getResource("/imgs/Image.JPG");
+        	URL url = ClassLoader.getSystemClassLoader().getResource("imgs/Image.JPG");
         	wIcon.setIcon(new ImageIcon(url));
-        	wIcon.setBounds(170, 120, 200, 200);
+        	wIcon.setBounds(170, 120, 256, 256);
         }
         catch(Exception e)
         {
@@ -130,7 +135,7 @@ class MainPage implements ActionListener
         rightPanelStartLbl3.setBounds(220, 75, 600, 35);
         submitLbl.setBounds(300, 340, 200, 30);
         adityaNameLbl.setBounds(400, 370, 200, 20);
-        vipinNameLbl.setBounds(400, 400, 200, 20);
+        vipinNameLbl.setBounds(400, 395, 200, 20);
 
         // all PANEL bounds
         titlePanel.setBounds(0, 0, 800, 40);
